@@ -1,0 +1,52 @@
+module ntp {
+
+  namespace "http://example.com/ntp";
+  prefix ntp;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  description
+    "Bla bla...";
+
+  revision 2016-01-01 {
+    description
+      "Initial revision.";
+  }
+
+  grouping ntp_conf {
+    leaf ntp_server_ipv4 {
+      type inet:ipv4-address;
+    }
+  }
+
+  list ntp {
+    description "This is an RFS skeleton service";
+
+    key name;
+    leaf name {
+      tailf:info "Unique service id";
+      tailf:cli-allow-range;
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint ntp-servicepoint;
+
+    // may replace this with other ways of refering to the devices.
+    leaf-list device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+    uses ntp_conf;
+  }
+}

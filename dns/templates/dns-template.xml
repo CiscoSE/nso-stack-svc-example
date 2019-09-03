@@ -1,0 +1,26 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+    <devices xmlns="http://tail-f.com/ns/ncs">
+        <device>
+            <!--
+                Select the devices from some data structure in the service
+                model. In this skeleton the devices are specified in a leaf-list.
+                Select all devices in that leaf-list:
+            -->
+            <name>{/device}</name>
+            <config>
+                <domain xmlns="http://tail-f.com/ned/cisco-ios-xr">
+                    <name-server>
+                        <address>{/name_server_ipv4}</address>
+                    </name-server>
+                </domain>
+                <configuration xmlns="http://xml.juniper.net/xnm/1.1/xnm">
+                    <system>
+                        <name-server>
+                            <name>{/name_server_ipv4}</name>
+                        </name-server>
+                    </system>
+                </configuration>
+            </config>
+        </device>
+    </devices>
+</config-template>
